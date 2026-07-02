@@ -41,7 +41,12 @@ export default function LandingPage() {
     const dispatch = useDispatch();
 
     const getAllResumeData = async () => {
-        // console.log('entered');
+        // 🛡️ GUARD CLAUSE: If user is null or doesn't have an _id, STOP here
+        if (!currentUser || !currentUser._id) {
+            console.log('User not loaded yet, skipping resume data fetch');
+            return; // Exit early to prevent the crash
+        }
+
         try {
             const response = await axios.get(`${BASE_URL}/data/get-all-resume-data?id=${currentUser._id}`, {
                 headers: {
@@ -90,9 +95,10 @@ export default function LandingPage() {
         }
     };
 
+    // 🚀 CRITICAL FIX: Add 'currentUser' to the dependency array
     useEffect(() => {
         getAllResumeData();
-    }, []);
+    }, [currentUser]); // <-- NOW it will re-run when user data loads
 
     const handleGetStarted = () => {
         navigate('/profile');

@@ -104,9 +104,10 @@ export default function SignIn() {
 
     return (
         <div style={styles.container}>
-            <div style={{ border: '1px solid black', position: 'relative', marginTop: '-600px', marginLeft: '-600px' }}>
-                {bubbles}
-            </div>
+        
+<div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', overflow: 'hidden', zIndex: 0, pointerEvents: 'none' }}>
+    {bubbles}
+</div>
             <button style={styles.button} onClick={handleGoogle} >
                 {loading ? <CircularProgress size={28}  /> :
                     <>
@@ -135,7 +136,7 @@ const styles = {
         alignItems: 'center',
         padding: '12px 21px',
         borderRadius: '5px',
-        marginLeft: '600px',
+        // marginLeft: '600px',
         border: 'black 2px solid',
         backgroundColor: '#fff',
         color: '#fff',
